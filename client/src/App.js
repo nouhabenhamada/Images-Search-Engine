@@ -47,7 +47,12 @@ function App() {
   return (
     <div style={{ backgroundColor: '#f0f0f0' }}>
       {/* Navbar */}
-      <AppBar position="static" sx={{ backgroundColor: 'black' }}>
+      <AppBar position="fixed" sx={{ 
+        backgroundColor: 'transparent',
+        boxShadow:'none',
+        backdropFilter: 'blur(5px)',
+        borderBottom: '2px solid black'
+         }}>
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold', color: 'white' }}>
             CBIR Project
@@ -68,26 +73,31 @@ function App() {
       {/* Main Section with Background Image */}
       <Box
         sx={{
-          backgroundImage: `url(/background3.jpg)`, // Image placed in the public folder
+          backgroundImage: `url(/background3.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          minHeight: '100vh', // Cover the entire area until the "About" section
+          minHeight: '100vh',
           padding: '50px 0',
         }}
       >
+        
         {/* Title Below Navbar */}
-        <Container maxWidth="md" sx={{ textAlign: 'center', mt: 2, mb: 4 }}>
+        <Container maxWidth="md" sx={{ textAlign: 'center', mt: 6, mb: 4 }}>
           <Typography
-            variant="h4"
+            variant="h3"
             sx={{
-              fontWeight: 'bold',
+              
+              fontWeight: '300',
               color: 'white',
-              fontFamily: 'Abril Fatface, sans-serif', // Apply Abril Fatface font
+              fontFamily: 'Helvetica, Arial, sans-serif',
+              letterSpacing: '1px',
+              textTransform: 'none'
             }}
           >
             Search Engine by Keywords and Images
           </Typography>
         </Container>
+
 
         {/* Search Form Section */}
         <Container maxWidth="md">
@@ -97,7 +107,7 @@ function App() {
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: Adds some overlay for readability
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
               padding: '20px',
               borderRadius: '8px',
             }}
@@ -139,10 +149,13 @@ function App() {
                   sx={{
                     backgroundColor: '#f0f0f0',
                     '& .MuiOutlinedInput-root': {
-                      '& fieldset': { borderColor: '#b0b0b0' },
+                      '& fieldset': { borderColor: '#a0a0a0' },
                       '&:hover fieldset': { borderColor: '#a0a0a0' },
                       '&.Mui-focused fieldset': { borderColor: '#a0a0a0' },
                     },
+                    
+                    width: '800px',
+                    borderRadius: '12px',
                   }}
                 />
               </Box>
@@ -214,7 +227,7 @@ function App() {
                     }}
                   >
                     <img
-                      src={`${API_URL}/images/${result._source.image_name}`}
+                      src={`${API_URL}/${result._source.fullPath}`}
                       alt={result._source.image_name}
                       style={{
                         width: '100%',
@@ -223,6 +236,10 @@ function App() {
                         borderRadius: '8px',
                       }}
                     />
+                    {/* Affichage temporaire du chemin pour déboguer */}
+                    <Typography variant="caption" display="block">
+                      {result._source.image_name}
+                    </Typography>
                   </Box>
                 ))}
               </Box>
@@ -237,19 +254,20 @@ function App() {
           About
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {/* Texte à gauche */}
           <Typography sx={{ flex: 1, mr: 4 }}>
-            This project is a Content-Based Image Retrieval (CBIR) system that allows users to search for images based on keywords or by uploading an image. CBIR systems are widely used in various domains such as e-commerce, digital libraries, and medical image retrieval, where visual similarity is key to finding relevant content.
+            This project is a Content-Based Image Retrieval system that allows users to search for images based on keywords or by uploading an image. CBIR systems are widely used in various domains such as e-commerce, digital libraries, and medical image retrieval, where visual similarity is key to finding relevant content.
             <br />
             Users can enter a specific keyword to search for images that match the given description, or they can upload an image to find visually similar images. The system processes the input data, compares it against a vast image database, and returns results based on either textual or visual similarity.
             <br />
-            The project uses advanced image processing and machine learning techniques to index, search, and retrieve images effectively. By leveraging modern algorithms, the system provides accurate results and a seamless user experience, ensuring fast and relevant image searches.
+            
+            <strong>
+              "Every picture tells a story; let your curiosity be the guide."
+            </strong>
           </Typography>
 
-          {/* Image à droite */}
           <Box sx={{ flexShrink: 0 }}>
             <img
-              src="/search.png"  // L'image se trouve dans le dossier public
+              src="/search.png"
               alt="Search"
               style={{
                 width: '100%',
@@ -269,15 +287,14 @@ function App() {
         </Typography>
         <Typography variant="body1" gutterBottom>
           If you have any questions or feedback, feel free to reach out to us at:
-       </Typography>
-       <Typography variant="body1" color="primary">
-         nour.laabidi@supcom.tn &nbsp; &amp; &nbsp; nouha.benhamada@supcom.tn
-       </Typography>
+        </Typography>
+        <Typography variant="body1" color="primary">
+        nour.laabidi@supcom.tn &nbsp; &amp; &nbsp; nouha.benhamada@supcom.tn
+        </Typography>
       </Container>
 
-
       {/* Footer */}
-      <Box sx={{ backgroundColor: '#333', color: 'white', padding: '20px', textAlign: 'center' }}>
+      <Box sx={{ backgroundColor: '#f0f0f0', color: '#333' , padding: '20px', textAlign: 'center', borderTop: '1px solid #DBD5D4' }}>
         <Typography variant="body2">
           &copy; 2024 Higher School of Communications of Tunis. All rights reserved.
         </Typography>
@@ -287,5 +304,3 @@ function App() {
 }
 
 export default App;
-
-

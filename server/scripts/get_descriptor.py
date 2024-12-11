@@ -13,9 +13,9 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 class FeatureExtractor:
     def __init__(self):
         # Charger VGG16 avec le top (couche de classification) inclus
-        base_model = VGG16(weights='imagenet', include_top=True)
+        base_model = VGG16(weights='imagenet')
         # Sélectionner la couche 'fc1' comme descripteur
-        self.model = Model(inputs=base_model.input, outputs=base_model.get_layer('fc1').output)
+        self.model = Model(inputs=base_model.input, outputs=base_model.get_layer('fc2').output)
 
     def extract(self, img):
         # Redimensionner l'image à 224x224 comme requis par VGG16
